@@ -28,9 +28,9 @@ if "vector" not in st.session_state:
     #time.sleep(5)
     st.session_state.loader = WebBaseLoader("https://www.prestigeconstructions.com/residential-projects")
     st.session_state.docs = st.session_state.loader.load()
-    st.session_state.documents.extend(st.session_state.docs)
+    #st.session_state.documents.extend(st.session_state.docs)
     st.session_state.text_splitter = RecursiveCharacterTextSplitter(chunk_size = 1000, chunk_overlap = 200)
-    st.session_state.doc = st.session_state.text_splitter.split_documents(st.session_state.documents)
+    st.session_state.doc = st.session_state.text_splitter.split_documents(st.session_state.docs)
     st.session_state.db = FAISS.from_documents(documents = st.session_state.doc, embedding=st.session_state.embedding)
 prompt = ChatPromptTemplate.from_template("""You are a Real Estate agent for Prestige Constructions, only suggests properties to user and if asked anything else than those things just say you cant help them and You have list of properties in context, suggest users properties strictly from context only
 <context>
